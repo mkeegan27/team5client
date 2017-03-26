@@ -1,0 +1,30 @@
+{
+  "extends": "eslint:recommended",
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "binaryLiterals": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": true,
+    "modules": true,
+    "octalLiterals": true,
+    "restParams": true,
+    "spread": true,
+    "templateStrings": true,
+    "unicodeCodePointEscape": true,
+    "jsx": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/no-unknown-property": 1
+  }
+}
