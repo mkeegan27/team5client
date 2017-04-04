@@ -2,8 +2,14 @@
 
 This repository so far will hold the client-side of the application.
 
+
+
 TO USE:
+
+
     `npm install`
+
+
     `npm run serve`
 
 
