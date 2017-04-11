@@ -1,14 +1,10 @@
+fs = require('fs')
+
 var ObjectID = require('mongodb').ObjectID;
-
 var databaseName = "CrimsonEagle";
+var initialData = {};
 
 
-var initialData = {
-
-
-
-    
-};
 
 /**
  * Resets a collection.
@@ -61,22 +57,32 @@ if(require.main === module) {
   // Connect to the database, and reset it!
   var MongoClient = require('mongodb').MongoClient;
   var url = 'mongodb://localhost:27017/' + databaseName;
-  MongoClient.connect(url, function(err, db) {
-    if (err) {
-      throw new Error("Could not connect to database: " + err);
-    } else {
-      console.log("Resetting database...");
-      resetDatabase(db, function() {
-        console.log("Database reset!");
-        // Close the database connection so NodeJS closes.
-        db.close();
+
+  fs.readFile('./squidboy.json', function (err, data) {
+      if(err){
+          return console.log(err);
+      }
+      initialData = JSON.parse(data);
+      MongoClient.connect(url, function(err, db) {
+          if (err) {
+              throw new Error("Could not connect to database: " + err);
+          } else {
+              console.log("Resetting database...");
+              resetDatabase(db, function() {
+                  console.log("Database reset!");
+                  // Close the database connection so NodeJS closes.
+                  db.close();
+              });
+          }
       });
-    }
-  });
+  })
 } else {
-  // require()'d.  Export the function.
-  module.exports = resetDatabase;
+    // require()'d.  Export the function.
+    module.exports = resetDatabase;
 }
+
+
+
 
 function addIndexes(db, cb) {
   db.collection('feedItems').createIndex({ "contents.contents": "text" }, null, cb);
