@@ -37,7 +37,11 @@ MongoClient.connect(url, function (err, db){
 				}else if(data === null){
 					return callback(null,null)
 				}
-				callback(null, data.toArray());
+				data.toArray().then(function (data){
+					callback(null, data)
+				}).catch(function(err){
+					callback(null, err)
+				})
 			})
 		}
 
@@ -51,6 +55,7 @@ MongoClient.connect(url, function (err, db){
 						res.status(400).send('Couldn\'t find squidboy')
 					}
 
+					console.log(data)
 					res.send(data)
 				})
 		})
@@ -58,9 +63,5 @@ MongoClient.connect(url, function (err, db){
 		app.listen(3000, function() {
 				console.log('Listening on port 3000!')
 		})
-
-
-
-		db.close();
 	}
 });
