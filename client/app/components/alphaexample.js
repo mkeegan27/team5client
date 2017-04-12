@@ -1,6 +1,8 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
 import {getSampleDataSystem} from '../server.js';
+import {getTotalWritesLifetime} from '../server.js';
+
 
 function getRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -19,16 +21,23 @@ export default React.createClass({
   },
 
   setLabels(sysNum){
-    getSampleDataSystem(sysNum, (info)=>{
+    getTotalWritesLifetime(sysNum, (info)=>{
+      var labelArr = [];
+      var toJSON = JSON.parse(info);
+      for(var i = 0; i < toJSON.length; i++) {
+        var obj = toJSON[i];
+        labelArr.push(obj["to"]);
+      }
       this.setState({
-        labels: info["labels"]
+        labels: labelArr
       });
     });
+
   },
 
   addSystem(sysNum){
     this.setLabels(sysNum);
-    getSampleDataSystem(sysNum, (info)=>{
+    getTotalWritesLifetime(sysNum, (info)=>{
       var arrayvar = this.state.datasets.slice();
       var addedAlready = false;
       arrayvar.forEach(function(result, index) {
@@ -37,27 +46,36 @@ export default React.createClass({
         }
       });
       if(!addedAlready){
+        var dataArr = [];
+        var toJSON = JSON.parse(info);
+        for(var i = 0; i < toJSON.length; i++) {
+          var obj = toJSON[i];
+          dataArr.push(obj["totalWriteIOsHistVlun"]);
+        }
+        var redColor = 150;
+        var blueColor = 87;
+        var greenColor = 87;
         arrayvar.push(
           {
-            label: 'System '+sysNum,
+            label: sysNum,
             fill: false,
             lineTension: 0.1,
-            backgroundColor: 'rgba(' + info["red"] +','+info["green"] +','+info["blue"] +',0.4)',
-            borderColor: 'rgba(' + info["red"] +','+info["green"] +','+info["blue"] +',1)',
+            backgroundColor: 'rgba(' + redColor +','+ greenColor +','+ blueColor +',0.4)',
+            borderColor: 'rgba(' + redColor +','+ greenColor +','+ blueColor +',1)',
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: 'rgba(' + info["red"] +','+info["green"] +','+info["blue"] +',1)',
+            pointBorderColor: 'rgba(' + redColor +','+ greenColor +','+ blueColor +',1)',
             pointBackgroundColor: '#fff',
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(' + info["red"] +','+info["green"] +','+info["blue"] +',1)',
+            pointHoverBackgroundColor: 'rgba(' + redColor +','+ greenColor +','+ blueColor +',1)',
             pointHoverBorderColor: 'rgba(220,220,220,1)',
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: info["data"]
+            data: dataArr
           }
         );
       this.setState({
@@ -88,13 +106,9 @@ export default React.createClass({
       <div>
         <h2>System comparison graph over time</h2>
         <Line data={this.state} />
-        <button onClick={this.addSystem.bind(this, 1)}>Add System 1!</button>
-        <button onClick={this.addSystem.bind(this, 2)}>Add System 2!</button>
-        <button onClick={this.addSystem.bind(this, 3)}>Add System 3!</button>
+        <button onClick={this.addSystem.bind(this, "squidboy")}>Add Squid Boy!</button>
         <br />
-        <button onClick={this.removeSystem.bind(this, 1)}>Remove System 1!</button>
-        <button onClick={this.removeSystem.bind(this, 2)}>Remove System 2!</button>
-        <button onClick={this.removeSystem.bind(this, 3)}>Remove System 3!</button>
+        <button onClick={this.removeSystem.bind(this, 1)}>Remove Squid Boy!</button>
       </div>
     );
   }

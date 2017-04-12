@@ -54,14 +54,12 @@ MongoClient.connect(url, function (err, db){
 					}else if(data === null){
 						res.status(400).send('Couldn\'t find squidboy')
 					}
-
-					console.log(data)
-					res.send(data)
+					res.send(data);
 				})
 		})
 
 		app.listen(3000, function() {
-				console.log('Listening on port 3000!')
+				console.log('Listening on port 3000!');
 		})
 	}
 });
