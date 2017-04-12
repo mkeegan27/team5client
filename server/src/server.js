@@ -45,6 +45,9 @@ MongoClient.connect(url, function (err, db){
 			})
 		}
 
+		app.get('/', function(req, res){
+    res.sendfile('index.html', { root: __dirname + "/../../client/build/index.html" } );
+});
 
 
 		app.get('/squidboy/totalWrites', function(req, res){//Doesn't resolve server name because there's only one server :^)
