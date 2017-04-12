@@ -45,6 +45,9 @@ MongoClient.connect(url, function (err, db){
 			})
 		}
 
+		app.get('/', function(req, res){
+    res.sendfile('index.html', { root: __dirname + "/../../client/build" } );
+});
 
 
 		app.get('/squidboy/totalWrites', function(req, res){//Doesn't resolve server name because there's only one server :^)
@@ -58,7 +61,7 @@ MongoClient.connect(url, function (err, db){
 				})
 		})
 
-		app.listen(3000, function() {
+		app.listen(80, function() {
 				console.log('Listening on port 3000!');
 		})
 	}
