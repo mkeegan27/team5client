@@ -37,10 +37,17 @@ MongoClient.connect(url, function (err, db){
 				}else if(data === null){
 					return callback(null,null)
 				}
-				callback(null, data.toArray());
+				data.toArray().then(function (data){
+					callback(null, data)
+				}).catch(function(err){
+					callback(null, err)
+				})
 			})
 		}
 
+		app.get('/', function(req, res){
+		    res.sendfile('index.html', { root: __dirname + "/../../client/build" } );
+		});
 
 
 		app.get('/squidboy/totalWrites', function(req, res){//Doesn't resolve server name because there's only one server :^)
@@ -50,17 +57,12 @@ MongoClient.connect(url, function (err, db){
 					}else if(data === null){
 						res.status(400).send('Couldn\'t find squidboy')
 					}
-
-					res.send(data)
+					res.send(data);
 				})
 		})
 
-		app.listen(3000, function() {
-				console.log('Listening on port 3000!')
+		app.listen(80, function() {
+				console.log('Listening on port 3000!');
 		})
-
-
-
-		db.close();
 	}
 });
