@@ -27,7 +27,6 @@ export default React.createClass({
   },
 
   addSystem(sysNum){
-    this.setLabels(sysNum);
     getSampleDataSystem(sysNum, (info)=>{
       var arrayvar = this.state.datasets.slice();
       var addedAlready = false;
@@ -69,18 +68,22 @@ export default React.createClass({
 
   removeSystem(sysNum){
     var arrayvar = this.state.datasets.slice();
+    var saveInd = -1;
     arrayvar.forEach(function(result, index) {
       if(result["label"] === 'System '+sysNum){
-        arrayvar.splice(index, 1);
+        saveInd = index;
       }
     });
-    this.setState({
-      datasets: arrayvar
-    });
+    if(saveInd !== -1){
+      arrayvar.splice(saveInd, 1);
+      this.setState({
+        datasets: arrayvar
+      });
+    }
   },
 
 	componentWillMount() {
-
+    this.setLabels(1);
 	},
 
   render() {

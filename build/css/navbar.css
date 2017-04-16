@@ -41,3 +41,8 @@ body {
   padding-right:25px;
   color: blue !important;
 }
+
+.graph-test {
+    height: 50%;
+    width: 50%;
+}

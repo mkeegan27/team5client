@@ -10,7 +10,9 @@ class App extends React.Component {
 		return (
 			<div>
 			<NavBar />
-			<AlphaExample />
+				<div className="graph-test">
+					<AlphaExample />
+				</div>
 			</div>
 		);
 	}
