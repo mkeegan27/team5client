@@ -43,6 +43,19 @@ body {
 }
 
 .graph-test {
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown__content {
+    display: none;
+    position: absolute;
+}
+
+.dropdown--active .dropdown__content {
+    display: block;
 }

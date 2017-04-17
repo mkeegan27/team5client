@@ -5,7 +5,7 @@ import {Line} from 'react-chartjs-2';
 import Dropdown from './dropdown';
 
 var selectedCheckboxes = new Set();
-
+var selectedProperty = "totalWrites"
 export default class TimeGraphPage extends React.Component {
 
   constructor(props){
@@ -31,7 +31,7 @@ export default class TimeGraphPage extends React.Component {
               change.oldValue +
               '\nnewValue: '
               + change.newValue);
-      this.setState({property: change.newValue});
+      selectedProperty = change.newValue;
   }
 
   setLabels(sysNum){
@@ -62,7 +62,8 @@ export default class TimeGraphPage extends React.Component {
     formSubmitEvent.preventDefault();
     if(selectedCheckboxes.size <1){
       this.setState({
-        datasets: []
+        datasets: [],
+        property: selectedProperty
       });
     }
     var totalData = [];
@@ -103,7 +104,8 @@ export default class TimeGraphPage extends React.Component {
             }
           );
           this.setState({
-            datasets: arrayvar
+            datasets: arrayvar,
+            property: selectedProperty
           });
       })
     }
@@ -161,7 +163,11 @@ export default class TimeGraphPage extends React.Component {
                 </form>
                 </th>
                   <th>
-                  <div id="bloc2"><Line data={obprop} /></div>
+                  <div id="bloc2">
+                    <h2>{this.state.property + " Time Graph"}</h2>
+                    <Line data={obprop} />
+
+                    </div>
                 </th>
                   </tr>
                   </tbody>
