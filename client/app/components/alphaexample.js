@@ -16,7 +16,7 @@ const getState = () => ({
 export default React.createClass({
   displayName: 'AlphaExample',
 
-  getInitialState() {
+  getInitialState(){
     return getState();
   },
 
@@ -106,6 +106,7 @@ export default React.createClass({
 	},
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <h2>System comparison graph over time</h2>
