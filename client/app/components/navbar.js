@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router';
+
 
 export default class NavBar extends React.Component{
 
@@ -10,15 +12,21 @@ export default class NavBar extends React.Component{
             <div className="nav navbar-nav navbar-left">
               <div className="btn-toolbar pull-left navbar-left" role="toolbar">
                 <div className="btn-group" role="group">
+                  <Link to={"/"}>
                   <button type="button" className="btn navbar-btn btn-default">
                     <span className="glyphicon glyphicon-home"></span> Home
                   </button>
+                </Link>
+                <Link to={"/time"}>
                   <button type="button" className="btn navbar-btn btn-default">
-                    <span className="glyphicon glyphicon-folder-open"></span> Saved Graphs
+                    <span className="glyphicon glyphicon-signal"></span> Time Graph
                   </button>
+                </Link>
+                <Link to={"/datacomp"}>
                   <button type="button" className="btn navbar-btn btn-default">
-                    <span className="glyphicon glyphicon-check"></span>Something Else
+                    <span className="glyphicon glyphicon-th"></span> Data Comparison Graph
                   </button>
+                </Link>
                 </div>
               </div>
             </div>
