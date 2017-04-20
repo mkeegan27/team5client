@@ -3,25 +3,25 @@
   height: 50px;
 }
 .navbar-btn{
-  border: none;
-  background-color: transparent;
+  border: none !important;
+  background-color: transparent !important;
   color: white !important;
 }
 .navbar-btn:hover {
   outline: 0 !important;
-  background-color: transparent !important;
+  background-color: transparent ;
 }
 .navbar-btn:active{
   color: black !important;
-  outline: 0;
+  outline: 0 !important;
 }
 .navbar-btn:focus{
   color: black !important;
   background-color: transparent !important;
-  outline: 0;
+  outline: 0 !important;
 }
 .navbar-left{
-  height:48px;
+  height:48px ;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -29,10 +29,10 @@
   text-align: center;
 }
 .home-btn{
-  font-size: 24px;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  padding-top:5px;
+  font-size: 24px ;
+  margin-bottom: 0px ;
+  margin-top: 0px ;
+  padding-top:5px ;
 }
 body {
   padding-top: 60px;

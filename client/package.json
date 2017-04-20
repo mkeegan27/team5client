@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "chart.js": "^2.5.0",
+    "react-bootstrap-counter": "^1.0.1",
     "react-chartjs-2": "^2.0.5",
     "react-widgets": "^3.4.6"
   }

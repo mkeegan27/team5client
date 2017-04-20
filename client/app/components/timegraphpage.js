@@ -3,9 +3,11 @@ import Checkbox from './checkbox';
 import {getTotalDataLifetime} from '../server.js';
 import {Line} from 'react-chartjs-2';
 import Dropdown from './dropdown';
+import CounterInput from 'react-bootstrap-counter';
 
 var selectedCheckboxes = new Set();
 var selectedProperty = 'totalWriteIOsHistVlun'
+var scope = 0
 export default class TimeGraphPage extends React.Component {
 
   constructor(props){
@@ -24,6 +26,9 @@ export default class TimeGraphPage extends React.Component {
     this.setLabels = this.setLabels.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.dropDownOnChange = this.dropDownOnChange.bind(this);
+    this.changeScope = this.changeScope.bind(this);
+
+
   }
 
   dropDownOnChange(change) {
@@ -39,7 +44,10 @@ export default class TimeGraphPage extends React.Component {
     getTotalDataLifetime(sysNum, property, (info)=>{
       var labelArr = [];
       var toJSON = JSON.parse(info);
-      for(var i = 0; i < toJSON.length; i++) {
+      if(scope == 0 || scope>toJSON.length){
+        scope = toJSON.length
+      }
+      for(var i = toJSON.length-scope; i < toJSON.length; i++) {
         var obj = toJSON[i];
         labelArr.push(obj["to"]);
       }
@@ -75,9 +83,11 @@ export default class TimeGraphPage extends React.Component {
           var arrayvar = totalData;
           var dataArr = [];
           var toJSON = JSON.parse(info);
-          for(var i = 0; i < toJSON.length; i++) {
+          if(scope == 0 || scope>toJSON.length){
+            scope = toJSON.length
+          }
+          for(var i = toJSON.length-scope; i < toJSON.length; i++) {
             var obj = toJSON[i];
-            console.log(obj)
             dataArr.push(obj[property]);
           }
           var redColor = 150;
@@ -112,6 +122,10 @@ export default class TimeGraphPage extends React.Component {
           });
       })
     }
+  }
+
+  changeScope(newScope){
+    scope = newScope;
   }
 
 
@@ -159,11 +173,14 @@ export default class TimeGraphPage extends React.Component {
                 labelField='description'
                 valueField='code'
                 onChange={this.dropDownOnChange}/>
-
-
-
-                  <button className="btn btn-default" type="submit">Save</button>
+              <br />
+              <p>Show me the __ most recent data points:</p>
+              <CounterInput value={940} min={1} max={1000} onChange={ (value) => { this.changeScope(value) } } />
+              <br />
+              <button className="btn btn-default" type="submit">Display</button>
                 </form>
+
+
                 </th>
                   <th>
                   <div id="bloc2">
