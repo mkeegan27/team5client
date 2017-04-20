@@ -1,11 +1,11 @@
 import React from 'react';
 import Checkbox from './checkbox';
-import {getTotalWritesLifetime} from '../server.js';
+import {getTotalDataLifetime} from '../server.js';
 import {Line} from 'react-chartjs-2';
 import Dropdown from './dropdown';
 
 var selectedCheckboxes = new Set();
-var selectedProperty = "totalWrites"
+var selectedProperty = 'totalWriteIOsHistVlun'
 export default class TimeGraphPage extends React.Component {
 
   constructor(props){
@@ -18,7 +18,7 @@ export default class TimeGraphPage extends React.Component {
       ],
       "labels": [],
       "datasets": [],
-      "property": 'totalWrites'
+      "property": 'totalWriteIOsHistVlun'
     }
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
     this.setLabels = this.setLabels.bind(this);
@@ -35,7 +35,8 @@ export default class TimeGraphPage extends React.Component {
   }
 
   setLabels(sysNum){
-    getTotalWritesLifetime(sysNum, (info)=>{
+    var property = this.state.property;
+    getTotalDataLifetime(sysNum, property, (info)=>{
       var labelArr = [];
       var toJSON = JSON.parse(info);
       for(var i = 0; i < toJSON.length; i++) {
@@ -60,22 +61,24 @@ export default class TimeGraphPage extends React.Component {
 
   handleFormSubmit(formSubmitEvent){
     formSubmitEvent.preventDefault();
-    if(selectedCheckboxes.size <1){
       this.setState({
         datasets: [],
         property: selectedProperty
       });
-    }
+
     var totalData = [];
+
     for (const checkbox of selectedCheckboxes) {
       this.setLabels(checkbox);
-      getTotalWritesLifetime(checkbox, (info)=>{//gotta figure out how to wait til after this method to set the state
+      var property = selectedProperty;
+      getTotalDataLifetime(checkbox, property, (info)=>{
           var arrayvar = totalData;
           var dataArr = [];
           var toJSON = JSON.parse(info);
           for(var i = 0; i < toJSON.length; i++) {
             var obj = toJSON[i];
-            dataArr.push(obj["totalWriteIOsHistVlun"]);
+            console.log(obj)
+            dataArr.push(obj[property]);
           }
           var redColor = 150;
           var blueColor = 87;
@@ -118,20 +121,20 @@ export default class TimeGraphPage extends React.Component {
     obprop["datasets"] = this.state.datasets;
     var options = [
         {
-            description: 'This is option A',
-            code: 'totalWrites'
+            description: 'total writes',
+            code: 'totalWriteIOsHistVlun'
         },
         {
-            description: 'This is option B',
-            code: 'totalReads'
+            description: 'cpu latest total',
+            code: 'cpuLatestTotalAvgPct'
         },
         {
-            description: 'This is option C',
-            code: 'someOtherProperty'
+            description: 'port total avg io',
+            code: 'portTotalAvgIOSizeKB'
         },
         {
-            description: 'This is option D',
-            code: 'aThirdProperty'
+            description: 'total bandwidth',
+            code: 'portTotalBandwidthMBPS'
         }
     ];
     return (
@@ -152,8 +155,8 @@ export default class TimeGraphPage extends React.Component {
                 }
                 <Dropdown id='myDropdown'
                 options={options}
-                value='totalWrites'
-                labelField='code'
+                value='totalWriteIOsHistVlun'
+                labelField='description'
                 valueField='code'
                 onChange={this.dropDownOnChange}/>
 

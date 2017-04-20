@@ -1,12 +1,12 @@
 import React from 'react';
 import Checkbox from './checkbox';
-import {getTotalWritesLifetime} from '../server.js';
+import {getTotalDataLifetime} from '../server.js';
 import {Bubble} from 'react-chartjs-2';
 import Dropdown from './dropdown';
 
 var selectedCheckboxes = new Set();
-var selectedProperty1 = "totalWrites"
-var selectedProperty2 = "totalWrites"
+var selectedProperty1 = "totalWriteIOsHistVlun"
+var selectedProperty2 = "totalWriteIOsHistVlun"
 export default class DataCompGraphPage extends React.Component {
 
   constructor(props){
@@ -19,8 +19,8 @@ export default class DataCompGraphPage extends React.Component {
       ],
       "labels": [],
       "datasets": [],
-      "property1": 'totalWrites',
-      "property2": 'totalWrites'
+      "property1": 'totalWriteIOsHistVlun',
+      "property2": 'totalWriteIOsHistVlun'
     }
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
     this.setLabels = this.setLabels.bind(this);
@@ -46,7 +46,7 @@ export default class DataCompGraphPage extends React.Component {
   }
 
   setLabels(sysNum){
-    getTotalWritesLifetime(sysNum, (info)=>{
+    getTotalDataLifetime(sysNum, selectedProperty1, (info)=>{
       var labelArr = [];
       var toJSON = JSON.parse(info);
       for(var i = 0; i < toJSON.length; i++) {
@@ -81,21 +81,20 @@ export default class DataCompGraphPage extends React.Component {
     var totalData = [];
     for (const checkbox of selectedCheckboxes) {
       this.setLabels(checkbox);
-      getTotalWritesLifetime(checkbox, (infoX)=>{//these two functions will be changed to take in the property
+      getTotalDataLifetime(checkbox, selectedProperty1, (infoX)=>{//these two functions will be changed to take in the property
         //from selectedProperty1 and 2
 
-          getTotalWritesLifetime(checkbox, (infoY)=>{
+          getTotalDataLifetime(checkbox, selectedProperty2, (infoY)=>{
             var arrayvar = totalData;
             var toJSONx = JSON.parse(infoX);
             var toJSONy = JSON.parse(infoY);
             //get the most recent value:
-            var xval = toJSONx[toJSONx.length - 1]["totalWriteIOsHistVlun"];//this will also have to be generalized 
-            var yval = toJSONy[toJSONy.length - 1]["totalWriteIOsHistVlun"];
+            var xval = toJSONx[toJSONx.length - 1][selectedProperty1];//this will also have to be generalized
+            var yval = toJSONy[toJSONy.length - 1][selectedProperty2];
             var redColor = 150;
             var blueColor = 87;
             var greenColor = 87;
-            console.log(xval);
-            console.log(yval);
+
             arrayvar.push(
               {
                 label: checkbox,
@@ -119,8 +118,9 @@ export default class DataCompGraphPage extends React.Component {
                 data:[{x:xval,y:yval,r:5}]
               }
             );
+            totalData = arrayvar;
             this.setState({
-              datasets: arrayvar,
+              datasets: totalData,
               property1: selectedProperty1,
               property2: selectedProperty2
             });
@@ -137,20 +137,20 @@ export default class DataCompGraphPage extends React.Component {
     obprop["datasets"] = this.state.datasets;
     var options = [
         {
-            description: 'This is option A',
-            code: 'totalWrites'
+            description: 'total writes',
+            code: 'totalWriteIOsHistVlun'
         },
         {
-            description: 'This is option B',
-            code: 'totalReads'
+            description: 'cpu latest total',
+            code: 'cpuLatestTotalAvgPct'
         },
         {
-            description: 'This is option C',
-            code: 'someOtherProperty'
+            description: 'port total avg io',
+            code: 'portTotalAvgIOSizeKB'
         },
         {
-            description: 'This is option D',
-            code: 'aThirdProperty'
+            description: 'total bandwidth',
+            code: 'portTotalBandwidthMBPS'
         }
     ];
     return (
@@ -171,15 +171,15 @@ export default class DataCompGraphPage extends React.Component {
                 }
                 <Dropdown id='myDropdownX'
                 options={options}
-                value='totalWrites'
-                labelField='code'
+                value='totalWriteIOsHistVlun'
+                labelField='description'
                 valueField='code'
                 onChange={this.dropDownOnChange1}/>
 
                 <Dropdown id='myDropdownY'
                 options={options}
-                value='totalWrites'
-                labelField='code'
+                value='totalWriteIOsHistVlun'
+                labelField='description'
                 valueField='code'
                 onChange={this.dropDownOnChange2}/>
 

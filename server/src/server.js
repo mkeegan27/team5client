@@ -30,8 +30,12 @@ MongoClient.connect(url, function (err, db){
 	}else{
 		console.log('Connected to database', url);
 
-		function getTotalWritesLifetime(server, callback){
-			db.collection(server).find({}, {from : 1, to : 1, totalWriteIOsHistVlun : 1}, function (err, data){
+		function getTotalDataLifetime(server, property, callback){
+			var query = {};
+			query["from"] =1;
+			query["to"] =1;
+			query[property] =1;
+			db.collection(server).find({}, query, function (err, data){
 				if(err){
 					return callback(err)
 				}else if(data === null){
@@ -46,12 +50,17 @@ MongoClient.connect(url, function (err, db){
 		}
 
 		app.get('/', function(req, res){
-		    res.sendfile('index.html', { root: __dirname + "/../../client/build" } );
+			res.sendfile('index.html', { root: __dirname + "/../../client/build" } );
 		});
 
 
-		app.get('/squidboy/totalWrites', function(req, res){//Doesn't resolve server name because there's only one server :^)
-				getTotalWritesLifetime('squidboy',function(err, data){
+
+
+
+		app.get('/sys/:sysid/prop/:propid', function(req, res){//Doesn't resolve server name because there's only one server :^)
+				var sysid = req.params.sysid;
+				var propid = req.params.propid;
+				getTotalDataLifetime(sysid, propid, function(err, data){
 					if(err){
 						res.status(500).send('Database error: ' + err)
 					}else if(data === null){
@@ -61,7 +70,7 @@ MongoClient.connect(url, function (err, db){
 				})
 		})
 
-		app.listen(80, function() {
+		app.listen(3000, function() {
 				console.log('Listening on port 3000!');
 		})
 	}

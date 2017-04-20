@@ -26,8 +26,8 @@ export function getSampleDataSystem(sysNum, cb){
   cb(fakeDatabase["sys" + sysNum]);
 }
 
-export function getTotalWritesLifetime(server, cb){ //server should always be the string squidboy for alpha
-    sendXHR('GET', 'squidboy/totalwrites', undefined, (xhr) => {
+export function getTotalDataLifetime(server, property, cb){ //server should always be the string squidboy for alpha
+    sendXHR('GET', 'sys/'+server+'/prop/'+property, undefined, (xhr) => {
         cb(xhr.responseText);
     });
 }
