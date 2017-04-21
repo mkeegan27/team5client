@@ -4,7 +4,23 @@ import {Link} from 'react-router';
 
 export default class NavBar extends React.Component{
 
+  constructor(props){
+    super(props);
+    this.state = {Username: "Username"}
+    this.changeUsername = this.changeUsername.bind(this);
+  }
+
+  changeUsername(name){
+    this.setState({Username: name});
+  }
+
   render(){
+
+    const names = ["Company 1", "Company 2"];
+    const companyList = names.map((names) =>
+      <li onClick={()=>this.changeUsername(names)}><a href="#">{names}</a></li>
+    );
+
     return(
       <nav className="navbar navbar-fixed-top navbar-default">
         <div className="container">
@@ -34,7 +50,7 @@ export default class NavBar extends React.Component{
               <div className="btn-toolbar pull-right" role="toolbar">
                 <div className="btn-group" role="group">
                   <button type="button" className="btn navbar-btn btn-default">
-                    <span className="glyphicon glyphicon-user"></span> Username
+                    <span className="glyphicon glyphicon-user"></span> {this.state.Username}
                   </button>
                 </div>
                 <div className="btn-group" role="group">
@@ -44,7 +60,8 @@ export default class NavBar extends React.Component{
                     <span className="caret"></span>
                   </button>
                   <ul className="dropdown-menu">
-                  <li><a href="#">Log out...</a></li>
+                  {companyList}
+                  <li><a onClick={()=>this.changeUsername("Username")} href="#">Log out...</a></li>
                   </ul>
                 </div>
               </div>
