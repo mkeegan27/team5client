@@ -50,7 +50,7 @@ MongoClient.connect(url, function (err, db){
 		}
 
 		app.get('/', function(req, res){
-			res.sendfile('index.html', { root: __dirname + "/../../client/build" } );
+			res.sendFile('index.html', { root: __dirname + "/../../client/build" } );
 		});
 
 
@@ -70,8 +70,8 @@ MongoClient.connect(url, function (err, db){
 				})
 		})
 
-		app.listen(3000, function() {
-				console.log('Listening on port 3000!');
+		app.listen(80, function() {
+				console.log('Listening on port 80!');
 		})
 	}
 });

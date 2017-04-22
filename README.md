@@ -5,8 +5,9 @@ This repository so far will hold the client-side of the application.
 
 
 TO USE:
-    `npm install`
-    `npm run serve`
 
+    Run `npm install` in the client and server directories to download the necessary node_modules
 
-Then navigate to localhost:8080 in your browser.
+    Edit the config file under server/node_modules/mongo-express to contain the proper database name
+
+    Then navigate to localhost in your browser.
