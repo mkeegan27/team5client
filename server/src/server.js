@@ -71,7 +71,7 @@ MongoClient.connect(url, function (err, db){
 		});
 
 
-		app.get('/company/:name', function (req, res)){
+		app.get('/company/:name', function (req, res){
 			var name = req.params.name;
 			resolveCompanyServers(name, function(err, data){
 				if(err){
@@ -81,7 +81,7 @@ MongoClient.connect(url, function (err, db){
 				}
 				res.send(data);
 			})
-		}
+		})
 
 
 		app.get('/sys/:sysid/prop/:propid', function(req, res){//Doesn't resolve server name because there's only one server :^)
@@ -98,8 +98,8 @@ MongoClient.connect(url, function (err, db){
 				})
 		})
 
-		app.listen(80, function() {
-				console.log('Listening on port 80!');
+		app.listen(8080, function() {
+				console.log('Listening on port 8080!');
 		})
 	}
 });
