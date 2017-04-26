@@ -83,10 +83,11 @@ export default class TimeGraphPage extends React.Component {
           var arrayvar = totalData;
           var dataArr = [];
           var toJSON = JSON.parse(info);
-          if(scope == 0 || scope>toJSON.length){
-            scope = toJSON.length
+          var currscope = toJSON.length;
+          if(scope > 0 && scope<toJSON.length){
+            currscope = scope;
           }
-          for(var i = toJSON.length-scope; i < toJSON.length; i++) {
+          for(var i = toJSON.length-currscope; i < toJSON.length; i++) {
             var obj = toJSON[i];
             dataArr.push(obj[property]);
           }

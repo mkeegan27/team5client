@@ -70,7 +70,7 @@ MongoClient.connect(url, function (err, db){
 				})
 		})
 
-		app.listen(80, function() {
+		app.listen(3000, function() {
 				console.log('Listening on port 80!');
 		})
 	}
