@@ -56,6 +56,12 @@ export default class TimeGraphPage extends React.Component {
 
   }
 
+  componentWillMount(){
+     selectedCheckboxes = new Set();
+     selectedProperty = 'totalWriteIOsHistVlun';
+     scope = 0;
+  }
+
 
   toggleCheckbox(label){
     if (selectedCheckboxes.has(label)) {
