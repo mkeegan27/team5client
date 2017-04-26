@@ -14,9 +14,7 @@ export default class DataCompGraphPage extends React.Component {
     super(props);
     this.state = {
       "items": [
-        'squidboy',
-        '1',
-        '2'
+        'squidboy'
       ],
       "labels": [],
       "datasets": [],
