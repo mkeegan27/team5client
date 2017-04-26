@@ -49,17 +49,45 @@ MongoClient.connect(url, function (err, db){
 			})
 		}
 
+		function resolveCompanyServers(name, callback){
+			var query = {};
+			query["system_companyName"] = name;
+			db.collection("summary").find({}, query, function (err, data){
+				if(err){
+					return callback(err)
+				}else if(data === null){
+					return callback(null,null)
+				}
+				data.toArray().then(function (data){
+					callback(null, data)
+				}).catch(function(err){
+					callback(null, err)
+				})
+			})
+		}
+
 		app.get('/', function(req, res){
 			res.sendFile('index.html', { root: __dirname + "/../../client/build" } );
 		});
 
 
-
+		app.get('/company/:name', function (req, res)){
+			var name = req.params.name;
+			resolveCompanyServers(name, function(err, data){
+				if(err){
+					res.status(500).send('Database error: ' + err)
+				}else if(data === null){
+					res.status(400).send('Couldn\'t find ' + name)
+				}
+				res.send(data);
+			})
+		}
 
 
 		app.get('/sys/:sysid/prop/:propid', function(req, res){//Doesn't resolve server name because there's only one server :^)
 				var sysid = req.params.sysid;
 				var propid = req.params.propid;
+							//  W :)
 				getTotalDataLifetime(sysid, propid, function(err, data){
 					if(err){
 						res.status(500).send('Database error: ' + err)
