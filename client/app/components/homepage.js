@@ -4,7 +4,9 @@ import Widget from './widget.js';
 
 
 export default class HomePage extends React.Component {
+
   render(){
+
     var newSet=new Set();
     newSet.add("squidboy");
     return (
@@ -22,15 +24,17 @@ export default class HomePage extends React.Component {
 
         {/* for now, the below code just shows examples. later we'll load the user's actual saved graphs*/}
         <div className="graph-test">
-        <table>
+        <table className="cellpadding">
+          <tbody>
   <tr>
-    <th><Widget type={1} property1={"totalWriteIOsHistVlun"} property2={"totalWriteIOsHistVlun"} scope={10} servers={newSet} /></th>
-    <th><Widget type={2} property1={"totalWriteIOsHistVlun"} property2={"portTotalAvgIOSizeKB"} scope={0} servers={newSet} /></th>
+    <td><Widget type={1} property1={"totalWriteIOsHistVlun"} property2={"totalWriteIOsHistVlun"} scope={10} servers={newSet} /></td>
+    <td><Widget type={2} property1={"totalWriteIOsHistVlun"} property2={"portTotalAvgIOSizeKB"} scope={0} servers={newSet} /></td>
   </tr>
   <tr>
     <td><Widget type={2} property1={"cpuLatestTotalAvgPct"} property2={"portTotalAvgIOSizeKB"} scope={0} servers={newSet} /></td>
     <td><Widget type={1} property1={"portTotalBandwidthMBPS"} property2={"portTotalBandwidthMBPS"} scope={25} servers={newSet} /></td>
   </tr>
+  </tbody>
 </table>
 </div>
       </div>

@@ -105,7 +105,7 @@ export default class DCGraphWidget extends React.Component {
 
     return (
       <div>
-                    <h5>{this.props.property1 + " and " + this.props.property2  + " Comparison Graph"}</h5>
+                    <h6>{this.props.property1 + " and " + this.props.property2  + " Comparison Graph"}</h6>
                     <Bubble data={obprop} />
       </div>
     );

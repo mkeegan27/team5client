@@ -42,6 +42,10 @@ body {
   color: blue !important;
 }
 
+.cellpadding td{
+  padding:20px;
+}
+
 .graph-test {
     height: 100%;
     width: 100%;
