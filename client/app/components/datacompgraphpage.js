@@ -5,7 +5,7 @@ import {Bubble} from 'react-chartjs-2';
 import Dropdown from './dropdown';
 
 
-var selectedCheckboxes = new Set(); //pass these in as props instead? or make them part of state
+var selectedCheckboxes = new Set(); 
 var selectedProperty1 = "totalWriteIOsHistVlun"
 var selectedProperty2 = "totalWriteIOsHistVlun"
 export default class DataCompGraphPage extends React.Component {
