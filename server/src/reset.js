@@ -5,8 +5,8 @@ var csv = require('csvtojson')
 var ObjectID = require('mongodb').ObjectID;
 var databaseName = 'CrimsonEagle';
 
-var paths = ['./squidboy.csv', './summary.csv']
-var names = ['squidboy', 'summary']
+var paths = ['./squidboy.csv', './summary.csv', './poundcakes.csv', './peepers.csv', './wareagle.csv']
+var names = ['squidboy', 'summary', 'poundcakes', 'peepers', 'wareagle']
 
 
 if(require.main === module) {
@@ -45,7 +45,7 @@ if(require.main === module) {
               cb()
           }
       }
-      
+
       processNextCSV()
   }
 
