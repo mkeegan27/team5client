@@ -68,9 +68,9 @@ export default class TimeGraphWidget extends React.Component {
             var obj = toJSON[i];
             dataArr.push(obj[property]);
           }
-          var redColor = 150;
-          var blueColor = 87;
-          var greenColor = 87;
+          var redColor = Math.floor(Math.random()*255);
+          var blueColor = Math.floor(Math.random()*255);
+          var greenColor = Math.floor(Math.random()*255);
           arrayvar.push(
             {
               label: checkbox,

@@ -60,9 +60,9 @@ export default class DCGraphWidget extends React.Component {
             //get the most recent value:
             var xval = toJSONx[toJSONx.length - 1][this.props.property1];//this will also have to be generalized
             var yval = toJSONy[toJSONy.length - 1][this.props.property2];
-            var redColor = 150;
-            var blueColor = 87;
-            var greenColor = 87;
+            var redColor = Math.floor(Math.random()*255);
+            var blueColor = Math.floor(Math.random()*255);
+            var greenColor = Math.floor(Math.random()*255);
 
             arrayvar.push(
               {

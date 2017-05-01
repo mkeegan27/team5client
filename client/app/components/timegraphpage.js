@@ -14,7 +14,10 @@ export default class TimeGraphPage extends React.Component {
     super(props);
     this.state = {
       "items": [
-        'squidboy'
+        'squidboy',
+        'poundcakes',
+        'peepers',
+        'wareagle'
       ],
       "labels": [],
       "datasets": [],
@@ -95,9 +98,9 @@ export default class TimeGraphPage extends React.Component {
             var obj = toJSON[i];
             dataArr.push(obj[property]);
           }
-          var redColor = 150;
-          var blueColor = 87;
-          var greenColor = 87;
+          var redColor = Math.floor(Math.random()*255);
+          var blueColor = Math.floor(Math.random()*255);
+          var greenColor = Math.floor(Math.random()*255);
           arrayvar.push(
             {
               label: checkbox,

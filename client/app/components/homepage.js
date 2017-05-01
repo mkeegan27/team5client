@@ -9,6 +9,7 @@ export default class HomePage extends React.Component {
 
     var newSet=new Set();
     newSet.add("squidboy");
+    newSet.add("poundcakes");
     return (
       <div>
         <Link to={"/time"}>
