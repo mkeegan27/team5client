@@ -10,6 +10,7 @@
     "express": "^4.13.4",
     "express-jsonschema": "^1.1.0",
     "mongo-express": "^0.33.0",
-    "mongodb": "^2.2.16"
+    "mongodb": "^2.2.16",
+    "csvtojson": "^1.1.4"
   }
 }
