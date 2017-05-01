@@ -50,7 +50,7 @@ export default class TimeGraphPage extends React.Component {
       }
       for(var i = toJSON.length-scope; i < toJSON.length; i++) {
         var obj = toJSON[i];
-        labelArr.push(obj["to"]);
+        labelArr.push(obj["to"].substring(0, 10));
       }
       this.setState({
         labels: labelArr

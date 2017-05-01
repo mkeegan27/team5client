@@ -59,7 +59,7 @@ export default class DataCompGraphPage extends React.Component {
       var toJSON = JSON.parse(info);
       for(var i = 0; i < toJSON.length; i++) {
         var obj = toJSON[i];
-        labelArr.push(obj["to"]);
+        labelArr.push(obj["to"].substring(0, 10));//take indices 0-9 inclusive
       }
       this.setState({
         labels: labelArr
