@@ -34,7 +34,7 @@ export default class TimeGraphWidget extends React.Component {
       if(scope == 0 || scope>toJSON.length){
         scope = toJSON.length
       }
-      for(var i = toJSON.length-scope; i < toJSON.length; i++) {
+      for(var i = 0; i < scope; i++) {
         var obj = toJSON[i];
         labelArr.push(obj["to"].substring(0, 10));
       }
@@ -64,7 +64,7 @@ export default class TimeGraphWidget extends React.Component {
           if(this.props.scope > 0 && this.props.scope<toJSON.length){
             currscope = this.props.scope;
           }
-          for(var i = toJSON.length-currscope; i < toJSON.length; i++) {
+          for(var i = 0; i < currscope; i++) {
             var obj = toJSON[i];
             dataArr.push(obj[property]);
           }

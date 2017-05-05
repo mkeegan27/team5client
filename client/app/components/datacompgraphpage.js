@@ -163,6 +163,8 @@ export default class DataCompGraphPage extends React.Component {
     ];
     return (
       <div className="container">
+        <h1>Data Comparison Graph Tool</h1>
+        <p>Here you can create a new Data Comparison Graph, which allows you to view trends in two different properties across systems.</p>
               <table width="100%">
                 <tbody>
                 <tr>
@@ -198,7 +200,7 @@ export default class DataCompGraphPage extends React.Component {
                 </th>
                   <th>
                   <div id="bloc2">
-                    <h2>{this.state.property1 + " and " + this.state.property2  + " Comparison Graph"}</h2>
+                    <h3>{this.state.property1 + " and " + this.state.property2  + " Comparison Graph"}</h3>
                     <Bubble data={obprop} />
 
                     </div>

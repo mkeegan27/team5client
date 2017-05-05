@@ -48,7 +48,7 @@ export default class TimeGraphPage extends React.Component {
       if(scope == 0 || scope>toJSON.length){
         scope = toJSON.length
       }
-      for(var i = toJSON.length-scope; i < toJSON.length; i++) {
+      for(var i = 0; i < scope; i++) {
         var obj = toJSON[i];
         labelArr.push(obj["to"].substring(0, 10));
       }
@@ -94,7 +94,7 @@ export default class TimeGraphPage extends React.Component {
           if(scope > 0 && scope<toJSON.length){
             currscope = scope;
           }
-          for(var i = toJSON.length-currscope; i < toJSON.length; i++) {
+          for(var i = 0; i < currscope; i++) {
             var obj = toJSON[i];
             dataArr.push(obj[property]);
           }
@@ -161,20 +161,22 @@ export default class TimeGraphPage extends React.Component {
     ];
     return (
       <div className="container">
+        <h1>Time Graph Tool</h1>
+        <p>Here you can create a new Time Graph, which will show you the progression of one property in different systems over time.</p>
               <table width="100%">
                 <tbody>
                 <tr>
                   <th>
                     <form onSubmit={this.handleFormSubmit}>
+              <div>
               {
                 this.state.items.map((label)=>{
                     return(
-                      <div>
                             <div id="bloc1"><Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} /></div>
-                      </div>
                     )
                   })
                 }
+                </div>
                 <Dropdown id='myDropdown'
                 options={options}
                 value='totalWriteIOsHistVlun'
@@ -192,7 +194,7 @@ export default class TimeGraphPage extends React.Component {
                 </th>
                   <th>
                   <div id="bloc2">
-                    <h2>{this.state.property + " Time Graph"}</h2>
+                    <h3>{this.state.property + " Time Graph"}</h3>
                     <Line data={obprop} />
 
                     </div>
