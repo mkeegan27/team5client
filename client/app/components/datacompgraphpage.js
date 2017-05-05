@@ -8,6 +8,8 @@ import Dropdown from './dropdown';
 var selectedCheckboxes = new Set();
 var selectedProperty1 = "totalWriteIOsHistVlun"
 var selectedProperty2 = "totalWriteIOsHistVlun"
+var selectedName1 = "Total Writes"
+var selectedName2 = "Total Writes"
 export default class DataCompGraphPage extends React.Component {
 
   constructor(props){
@@ -22,7 +24,9 @@ export default class DataCompGraphPage extends React.Component {
       "labels": [],
       "datasets": [],
       "property1": 'totalWriteIOsHistVlun',
-      "property2": 'totalWriteIOsHistVlun'
+      "property2": 'totalWriteIOsHistVlun',
+      "name1": 'Total Writes',
+      "name2": 'Total Writes',
     }
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
     this.setLabels = this.setLabels.bind(this);
@@ -35,6 +39,8 @@ export default class DataCompGraphPage extends React.Component {
      selectedCheckboxes = new Set();
      selectedProperty1 = "totalWriteIOsHistVlun"
      selectedProperty2 = "totalWriteIOsHistVlun"
+     selectedName1 = 'Total Writes'
+     selectedName2 = 'Total Writes'
   }
 
   dropDownOnChange1(change) {
@@ -43,6 +49,18 @@ export default class DataCompGraphPage extends React.Component {
               '\nnewValue: '
               + change.newValue);
       selectedProperty1 = change.newValue;
+      if(selectedProperty1 == 'totalWriteIOsHistVlun'){
+        selectedName1 = 'Total Writes';
+      }
+      else if (selectedProperty1 == 'cpuLatestTotalAvgPct'){
+        selectedName1 = 'Latest CPU Average Percent'
+      }
+      else if (selectedProperty1 == 'portTotalAvgIOSizeKB'){
+        selectedName1 = 'Average IO Size (KB)'
+      }
+      else{
+        selectedName1 = 'Bandwidth of Read/Write (Mb/Sec)'
+      }
   }
 
   dropDownOnChange2(change) {
@@ -51,6 +69,18 @@ export default class DataCompGraphPage extends React.Component {
               '\nnewValue: '
               + change.newValue);
       selectedProperty2 = change.newValue;
+      if(selectedProperty2 == 'totalWriteIOsHistVlun'){
+        selectedName2 = 'Total Writes';
+      }
+      else if (selectedProperty2 == 'cpuLatestTotalAvgPct'){
+        selectedName2 = 'Latest CPU Average Percent'
+      }
+      else if (selectedProperty2 == 'portTotalAvgIOSizeKB'){
+        selectedName2 = 'Average IO Size (KB)'
+      }
+      else{
+        selectedName2 = 'Bandwidth of Read/Write (Mb/Sec)'
+      }
   }
 
   setLabels(sysNum){
@@ -83,7 +113,9 @@ export default class DataCompGraphPage extends React.Component {
       this.setState({
         datasets: [],
         property1: selectedProperty1,
-        property2: selectedProperty2
+        property2: selectedProperty2,
+        name1: selectedName1,
+        name2: selectedName2
       });
     }
     var totalData = [];
@@ -130,7 +162,9 @@ export default class DataCompGraphPage extends React.Component {
             this.setState({
               datasets: totalData,
               property1: selectedProperty1,
-              property2: selectedProperty2
+              property2: selectedProperty2,
+              name1: selectedName1,
+              name2: selectedName2
             });
           });
 
@@ -145,19 +179,19 @@ export default class DataCompGraphPage extends React.Component {
     obprop["datasets"] = this.state.datasets;
     var options = [
         {
-            description: 'total writes',
+            description: 'Total writes',
             code: 'totalWriteIOsHistVlun'
         },
         {
-            description: 'cpu latest total',
+            description: 'CPU latest total',
             code: 'cpuLatestTotalAvgPct'
         },
         {
-            description: 'port total avg io',
+            description: 'Port total avg io',
             code: 'portTotalAvgIOSizeKB'
         },
         {
-            description: 'total bandwidth',
+            description: 'Total bandwidth',
             code: 'portTotalBandwidthMBPS'
         }
     ];
@@ -195,7 +229,7 @@ export default class DataCompGraphPage extends React.Component {
 
 
 
-                  <button className="btn btn-default" type="submit">Save</button>
+                <button className="btn btn-default" type="submit">Display</button>
                 </form>
                 </th>
                   <th>
