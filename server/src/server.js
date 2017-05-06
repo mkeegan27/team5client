@@ -15,7 +15,7 @@ app.use(bodyParser.text());
 // Support receiving JSON in HTTP request bodies
 // app.use(bodyParser.json());
 
-app.use(express.static('../client/build'));
+app.use(express.static('../../client/build'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
