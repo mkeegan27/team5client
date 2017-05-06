@@ -234,7 +234,7 @@ export default class DataCompGraphPage extends React.Component {
                 </th>
                   <th>
                   <div id="bloc2">
-                    <h3>{this.state.property1 + " and " + this.state.property2  + " Comparison Graph"}</h3>
+                    <h3>{this.state.name1 + " and " + this.state.name2  + " Comparison Graph"}</h3>
                     <Bubble data={obprop} />
 
                     </div>
