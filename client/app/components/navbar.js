@@ -43,6 +43,11 @@ export default class NavBar extends React.Component{
                     <span className="glyphicon glyphicon-th"></span> Data Comparison Graph
                   </button>
                 </Link>
+                <Link to={"/info"}>
+                  <button type="button" className="btn navbar-btn btn-default">
+                    <span className="glyphicon glyphicon-globe"></span> Info
+                  </button>
+                </Link>
                 </div>
               </div>
             </div>

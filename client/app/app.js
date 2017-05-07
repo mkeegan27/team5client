@@ -6,12 +6,21 @@ import NavBar from './components/navbar';
 import DataCompGraphPage from './components/datacompgraphpage';
 import TimeGraphPage from './components/timegraphpage';
 import HomePage from './components/homepage';
+import InfoPage from './components/infoPage';
 
 
 class Home extends React.Component {
   render() {
     return (
       <HomePage user={1}/>
+    );
+  }
+}
+
+class Info extends React.Component {
+  render() {
+    return (
+      <InfoPage />
     );
   }
 }
@@ -52,6 +61,7 @@ ReactDOM.render((
       <Route path="/home" component={Home} />
 			<Route path="/time" component={TimeGraph} />
 			<Route path="/datacomp" component={DataCompGraph} />
+      <Route path="/info" component={Info} />
     </Route>
   </Router>
 ),document.getElementById('app'));
