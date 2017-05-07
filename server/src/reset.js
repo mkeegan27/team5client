@@ -5,8 +5,8 @@ var csv = require('csvtojson')
 var ObjectID = require('mongodb').ObjectID;
 var databaseName = 'CrimsonEagle';
 
-var paths = ['./squidboy.csv', './summary.csv', './poundcakes.csv', './peepers.csv', './wareagle.csv', './304.csv', './330.csv']
-var names = ['squidboy', 'summary', 'poundcakes', 'peepers', 'wareagle', '304', '330']
+var paths = ['./squidboy.csv', './summary.csv', './poundcakes.csv', './peepers.csv', './wareagle.csv', './squirrel-girl.csv']
+var names = ['squidboy', 'summary', 'poundcakes', 'peepers', 'wareagle', 'squirrel-girl']
 //var paths = ['./summary.csv', './304-perform.csv', './330-perform.csv']
 //var names = ['summary', '304', '330']
 

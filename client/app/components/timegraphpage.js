@@ -17,7 +17,8 @@ export default class TimeGraphPage extends React.Component {
         'squidboy',
         'poundcakes',
         'peepers',
-        'wareagle'
+        'wareagle',
+        'squirrel-girl'
       ],
       "labels": [],
       "datasets": [],
@@ -151,12 +152,32 @@ export default class TimeGraphPage extends React.Component {
             code: 'cpuLatestTotalAvgPct'
         },
         {
+          description: 'port write Avg io',
+          code: 'portWriteAvgIOSizeKB'
+        },
+        {
+          description: 'port read Avg io',
+          code: 'portReadAvgIOSizeKB'
+        },
+        {
             description: 'port total avg io',
             code: 'portTotalAvgIOSizeKB'
         },
         {
+          description: 'write bandwidth',
+          code: 'portWriteBandwidthMBPS'
+        },
+        {
+          description: 'read bandwidth' ,
+          code: 'portReadBandwidthMBPS'
+        },
+        {
             description: 'total bandwidth',
             code: 'portTotalBandwidthMBPS'
+        },
+        {
+          description: 'delAcks' ,
+          code: 'delAcks'
         }
     ];
     return (

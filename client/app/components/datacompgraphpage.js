@@ -19,7 +19,8 @@ export default class DataCompGraphPage extends React.Component {
         'squidboy',
         'poundcakes',
         'peepers',
-        'wareagle'
+        'wareagle',
+        'squirrel-girl'
       ],
       "labels": [],
       "datasets": [],
@@ -58,8 +59,23 @@ export default class DataCompGraphPage extends React.Component {
       else if (selectedProperty1 == 'portTotalAvgIOSizeKB'){
         selectedName1 = 'Average IO Size (KB)'
       }
-      else{
+      else if (selectedProperty1 == 'portWriteAvgIOSizeKB'){
+        selectedName1 = 'Average IO Size (KB, Write only)'
+      }
+      else if (selectedProperty1 == 'portReadAvgIOSizeKB'){
+        selectedName1 = 'Average IO Size (KB, Read only)'
+      }
+      else if (selectedProperty1 == 'portTotalBandwidthMBPS'){
         selectedName1 = 'Bandwidth of Read/Write (Mb/Sec)'
+      }
+      else if (selectedProperty1 == 'portWriteBandwidthMBPS'){
+        selectedName1 = 'Bandwidth of Write (Mb/Sec)'
+      }
+      else if (selectedProperty1 == 'portReadBandwidthMBPS'){
+        selectedName1 = 'Bandwidth of Read (Mb/Sec)'
+      }
+      else{
+        selectedName1 = 'delAcks'
       }
   }
 
@@ -78,8 +94,23 @@ export default class DataCompGraphPage extends React.Component {
       else if (selectedProperty2 == 'portTotalAvgIOSizeKB'){
         selectedName2 = 'Average IO Size (KB)'
       }
-      else{
+      else if (selectedProperty2 == 'portWriteAvgIOSizeKB'){
+        selectedName2 = 'Average IO Size (KB, Write only)'
+      }
+      else if (selectedProperty2 == 'portReadAvgIOSizeKB'){
+        selectedName2 = 'Average IO Size (KB, Read only)'
+      }
+      else if (selectedProperty2 == 'portTotalBandwidthMBPS'){
         selectedName2 = 'Bandwidth of Read/Write (Mb/Sec)'
+      }
+      else if (selectedProperty2 == 'portWriteBandwidthMBPS'){
+        selectedName2 = 'Bandwidth of Write (Mb/Sec)'
+      }
+      else if (selectedProperty2 == 'portReadBandwidthMBPS'){
+        selectedName2 = 'Bandwidth of Read (Mb/Sec)'
+      }
+      else{
+        selectedName2 = 'delAcks'
       }
   }
 
@@ -178,22 +209,42 @@ export default class DataCompGraphPage extends React.Component {
     obprop["labels"] = this.state.labels;
     obprop["datasets"] = this.state.datasets;
     var options = [
-        {
-            description: 'Total writes',
-            code: 'totalWriteIOsHistVlun'
-        },
-        {
-            description: 'CPU latest total',
-            code: 'cpuLatestTotalAvgPct'
-        },
-        {
-            description: 'Port total avg io',
-            code: 'portTotalAvgIOSizeKB'
-        },
-        {
-            description: 'Total bandwidth',
-            code: 'portTotalBandwidthMBPS'
-        }
+      {
+          description: 'total writes',
+          code: 'totalWriteIOsHistVlun'
+      },
+      {
+          description: 'cpu latest total',
+          code: 'cpuLatestTotalAvgPct'
+      },
+      {
+        description: 'port write Avg io',
+        code: 'portWriteAvgIOSizeKB'
+      },
+      {
+        description: 'port read Avg io',
+        code: 'portReadAvgIOSizeKB'
+      },
+      {
+          description: 'port total avg io',
+          code: 'portTotalAvgIOSizeKB'
+      },
+      {
+        description: 'write bandwidth',
+        code: 'portWriteBandwidthMBPS'
+      },
+      {
+        description: 'read bandwidth' ,
+        code: 'portReadBandwidthMBPS'
+      },
+      {
+          description: 'total bandwidth',
+          code: 'portTotalBandwidthMBPS'
+      },
+      {
+        description: 'delAcks' ,
+        code: 'delAcks'
+      }
     ];
     return (
       <div className="container">
@@ -212,7 +263,7 @@ export default class DataCompGraphPage extends React.Component {
                       </div>
                     )
                   })
-                }
+                }​
                 <Dropdown id='myDropdownX'
                 options={options}
                 value='totalWriteIOsHistVlun'

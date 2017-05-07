@@ -11,6 +11,7 @@ export default class HomePage extends React.Component {
     newSet.add("poundcakes");
     newSet.add("peepers");
     newSet.add("wareagle");
+    newSet.add("squirrel-girl");
 
     var dataArray = [
       {
