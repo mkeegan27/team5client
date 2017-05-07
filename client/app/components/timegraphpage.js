@@ -7,6 +7,7 @@ import CounterInput from 'react-bootstrap-counter';
 
 var selectedCheckboxes = new Set();
 var selectedProperty = 'totalWriteIOsHistVlun'
+var selectedName3 = "select a server"
 var scope = 0
 export default class TimeGraphPage extends React.Component {
 
@@ -14,11 +15,12 @@ export default class TimeGraphPage extends React.Component {
     super(props);
     this.state = {
       "items": [
-        'squidboy',
-        'poundcakes',
-        'peepers',
-        'wareagle',
-        'squirrel-girl'
+        {name:'select a server'},
+        {name:'squidboy'},
+        {name:'poundcakes'},
+        {name:'peepers'},
+        {name:'wareagle'},
+        {name:'squirrel-girl'}
       ],
       "labels": [],
       "datasets": [],
@@ -29,7 +31,7 @@ export default class TimeGraphPage extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.dropDownOnChange = this.dropDownOnChange.bind(this);
     this.changeScope = this.changeScope.bind(this);
-
+    this.dropDownOnChange3 = this.dropDownOnChange3.bind(this);
 
   }
 
@@ -39,6 +41,21 @@ export default class TimeGraphPage extends React.Component {
               '\nnewValue: '
               + change.newValue);
       selectedProperty = change.newValue;
+  }
+
+  dropDownOnChange3(change){
+    console.log('onChangeForSelect:\noldValue: ' +
+            change.oldValue +
+            '\nnewValue: '
+            + change.newValue);
+    selectedName3 = change.newValue;
+    if(selectedName3 != 'select a server'){
+      if(selectedCheckboxes.has(selectedName3)){
+        selectedCheckboxes.delete(selectedName3);
+      } else {
+        selectedCheckboxes.add(selectedName3);
+      }
+    }
   }
 
   setLabels(sysNum){
@@ -190,14 +207,17 @@ export default class TimeGraphPage extends React.Component {
                   <th>
                     <form onSubmit={this.handleFormSubmit}>
               <div>
-              {
-                this.state.items.map((label)=>{
-                    return(
-                            <div id="bloc1"><Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} /></div>
-                    )
-                  })
-                }
+
                 </div>
+                <p> select a server to add to/remove from the graph:</p>
+                <Dropdown id= 'myDropdownL'
+                options={this.state.items}
+                value='select a server'
+                labelField='name'
+                valueField='name'
+                onChange={this.dropDownOnChange3}/>
+                <br></br>
+                <p> select the property to display on the graph:</p>
                 <Dropdown id='myDropdown'
                 options={options}
                 value='totalWriteIOsHistVlun'
