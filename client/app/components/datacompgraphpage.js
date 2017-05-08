@@ -10,17 +10,19 @@ var selectedProperty1 = "totalWriteIOsHistVlun"
 var selectedProperty2 = "totalWriteIOsHistVlun"
 var selectedName1 = "Total Writes"
 var selectedName2 = "Total Writes"
+var selectedName3 = "select a server"
 export default class DataCompGraphPage extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
       "items": [
-        'squidboy',
-        'poundcakes',
-        'peepers',
-        'wareagle',
-        'squirrel-girl'
+        {name:'select a server'},
+        {name:'squidboy'},
+        {name:'poundcakes'},
+        {name:'peepers'},
+        {name:'wareagle'},
+        {name:'squirrel-girl'}
       ],
       "labels": [],
       "datasets": [],
@@ -34,6 +36,7 @@ export default class DataCompGraphPage extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.dropDownOnChange1 = this.dropDownOnChange1.bind(this);
     this.dropDownOnChange2 = this.dropDownOnChange2.bind(this);
+    this.dropDownOnChange3 = this.dropDownOnChange3.bind(this);
   }
 
   componentWillMount(){
@@ -42,6 +45,7 @@ export default class DataCompGraphPage extends React.Component {
      selectedProperty2 = "totalWriteIOsHistVlun"
      selectedName1 = 'Total Writes'
      selectedName2 = 'Total Writes'
+     selectedName3 = 'squidboy'
   }
 
   dropDownOnChange1(change) {
@@ -112,6 +116,21 @@ export default class DataCompGraphPage extends React.Component {
       else{
         selectedName2 = 'delAcks'
       }
+  }
+
+  dropDownOnChange3(change){
+    console.log('onChangeForSelect:\noldValue: ' +
+            change.oldValue +
+            '\nnewValue: '
+            + change.newValue);
+    selectedName3 = change.newValue;
+    if(selectedName3 != 'select a server'){
+      if(selectedCheckboxes.has(selectedName3)){
+        selectedCheckboxes.delete(selectedName3);
+      } else {
+        selectedCheckboxes.add(selectedName3);
+      }
+    }
   }
 
   setLabels(sysNum){
@@ -256,21 +275,25 @@ export default class DataCompGraphPage extends React.Component {
                   <th>
                     <form onSubmit={this.handleFormSubmit}>
               {
-                this.state.items.map((label)=>{
-                    return(
-                      <div>
-                            <div id="bloc1"><Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} /></div>
-                      </div>
-                    )
-                  })
+
                 }​
+                <p> select a server to add to/remove from the graph</p>
+                <Dropdown id= 'myDropdownL'
+                options={this.state.items}
+                value='select a server'
+                labelField='name'
+                valueField='name'
+                onChange={this.dropDownOnChange3}/>
+                <br></br>
+                <p> select the property displayed on the X axis</p>
                 <Dropdown id='myDropdownX'
                 options={options}
                 value='totalWriteIOsHistVlun'
                 labelField='description'
                 valueField='code'
                 onChange={this.dropDownOnChange1}/>
-
+              <br></br>
+              <p> select the property displayed on the Y axis</p>
                 <Dropdown id='myDropdownY'
                 options={options}
                 value='totalWriteIOsHistVlun'
