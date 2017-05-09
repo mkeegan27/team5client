@@ -16,11 +16,11 @@ export default class Widget extends React.Component {
     render(){
       if(this.props.type == 1){
         return(
-          <TimeGraphWidget scope={this.props.scope} property={this.props.property1} selectedCheckboxes={this.props.servers} />
+          <TimeGraphWidget name={this.props.name1} scope={this.props.scope} property={this.props.property1} selectedCheckboxes={this.props.servers} />
         );
       }else{
         return(
-          <DCGraphWidget property1={this.props.property1} property2={this.props.property2} selectedCheckboxes={this.props.servers} />
+          <DCGraphWidget name1={this.props.name1} name2={this.props.name2} property1={this.props.property1} property2={this.props.property2} selectedCheckboxes={this.props.servers} />
         );
       }
     }

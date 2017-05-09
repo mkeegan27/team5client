@@ -18,6 +18,8 @@ export default class HomePage extends React.Component {
         "type":1,
         "prop1":"totalWriteIOsHistVlun",
         "prop2":"totalWriteIOsHistVlun",
+        "name1":"Total Writes",
+        "name2":"Total Writes",
         "scope":10,
         "servers":newSet
       },
@@ -25,6 +27,8 @@ export default class HomePage extends React.Component {
         "type":2,
         "prop1":"totalWriteIOsHistVlun",
         "prop2":"portTotalAvgIOSizeKB",
+        "name1":"Total Writes",
+        "name2":"Average IO Size (KB)",
         "scope":10,
         "servers":newSet
       },
@@ -32,6 +36,8 @@ export default class HomePage extends React.Component {
         "type":1,
         "prop1":"portTotalBandwidthMBPS",
         "prop2":"portTotalBandwidthMBPS",
+        "name1":"Bandwidth of Read/Write (Mb/Sec)",
+        "name2":"Bandwidth of Read/Write (Mb/Sec)",
         "scope":25,
         "servers":newSet
       },
@@ -39,6 +45,8 @@ export default class HomePage extends React.Component {
         "type":2,
         "prop1":"cpuLatestTotalAvgPct",
         "prop2":"portTotalAvgIOSizeKB",
+        "name1":"Latest CPU Average Percent",
+        "name2":"Average IO Size (KB)",
         "scope":0,
         "servers":newSet
       },
@@ -46,6 +54,8 @@ export default class HomePage extends React.Component {
         "type":1,
         "prop1":"totalWriteIOsHistVlun",
         "prop2":"totalWriteIOsHistVlun",
+        "name1":"Total Writes",
+        "name2":"Total Writes",
         "scope":100,
         "servers":newSet
       },
@@ -53,6 +63,8 @@ export default class HomePage extends React.Component {
         "type":2,
         "prop1":"totalWriteIOsHistVlun",
         "prop2":"totalWriteIOsHistVlun",
+        "name1":"Total Writes",
+        "name2":"Total Writes",
         "scope":0,
         "servers":newSet
       }
@@ -82,7 +94,7 @@ export default class HomePage extends React.Component {
             {dataArray.map((obj)=>{
               return(
                 <tr><td></td><td>
-                  <Widget type={obj.type} property1={obj.prop1} property2={obj.prop2} scope={obj.scope} servers={obj.servers} />
+                  <Widget type={obj.type} name1={obj.name1} name2={obj.name2} property1={obj.prop1} property2={obj.prop2} scope={obj.scope} servers={obj.servers} />
                 </td></tr>
               )
             })}

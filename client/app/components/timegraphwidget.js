@@ -111,7 +111,7 @@ export default class TimeGraphWidget extends React.Component {
     return (
       <div>
 
-                    <h6>{this.props.property + " Time Graph"}</h6>
+                    <h6>{this.props.name + " Time Graph"}</h6>
                     <Line data={obprop} />
 
       </div>

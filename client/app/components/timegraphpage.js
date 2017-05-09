@@ -9,6 +9,17 @@ var selectedCheckboxes = new Set();
 var selectedProperty = 'totalWriteIOsHistVlun'
 var selectedName3 = "select a server"
 var scope = 0
+
+var mapping = {};
+mapping['totalWriteIOsHistVlun'] = "Total Writes";
+mapping['cpuLatestTotalAvgPct'] = "Latest CPU Average Percent";
+mapping['portTotalAvgIOSizeKB'] = "Average IO Size (KB)";
+mapping['portWriteAvgIOSizeKB'] = "Average IO Size (KB, Write only)";
+mapping['portReadAvgIOSizeKB'] = "Average IO Size (KB, Read only)";
+mapping['portTotalBandwidthMBPS'] = "Bandwidth of Read/Write (Mb/Sec)";
+mapping['portWriteBandwidthMBPS'] = "Bandwidth of Write (Mb/Sec)";
+mapping['portReadBandwidthMBPS'] = "Bandwidth of Read (Mb/Sec)";
+
 export default class TimeGraphPage extends React.Component {
 
   constructor(props){
@@ -24,7 +35,8 @@ export default class TimeGraphPage extends React.Component {
       ],
       "labels": [],
       "datasets": [],
-      "property": 'totalWriteIOsHistVlun'
+      "property": 'totalWriteIOsHistVlun',
+      "propertyreal": "Total Writes"
     }
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
     this.setLabels = this.setLabels.bind(this);
@@ -96,7 +108,8 @@ export default class TimeGraphPage extends React.Component {
     formSubmitEvent.preventDefault();
       this.setState({
         datasets: [],
-        property: selectedProperty
+        property: selectedProperty,
+        propertyreal: mapping[selectedProperty]
       });
 
     var totalData = [];
@@ -144,7 +157,8 @@ export default class TimeGraphPage extends React.Component {
           );
           this.setState({
             datasets: arrayvar,
-            property: selectedProperty
+            property: selectedProperty,
+            propertyreal: mapping[selectedProperty]
           });
       })
     }
@@ -235,7 +249,7 @@ export default class TimeGraphPage extends React.Component {
                 </th>
                   <th>
                   <div id="bloc2">
-                    <h3>{this.state.property + " Time Graph"}</h3>
+                    <h3>{this.state.propertyreal + " Time Graph"}</h3>
                     <Line data={obprop} />
 
                     </div>
